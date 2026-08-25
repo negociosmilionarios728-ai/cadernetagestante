@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Caderneta da Gestante — Organize sua gestação</title>
+<meta name="description" content="Caderneta para imprimir e acompanhar a gravidez, o pré-natal e o pós-parto. 140 páginas, acesso imediato, com bônus grátis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+/* ---------- Tokens ---------- */
+:root{
+  --paper: #FBF6EC;
+  --paper-soft: #F1E8D6;
+  --ink: #2E2620;
+  --ink-soft: #6B5F52;
+  --terracotta: #C8685F;
+  --terracotta-dark: #A8524A;
+  --olive: #565F3D;
+  --olive-soft: #E4E7D6;
+  --rose: #E2897C;
+  --rose-pale: #F6DCD6;
+  --gold: #B08A3E;
+  --line: #E4D9C4;
+  --card: #FFFFFF;
+  --shadow: 0 18px 40px -18px rgba(46,38,32,.25);
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --maxw: 620px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+  padding-bottom:76px;
+}
+img{max-width:100%;display:block;}
+h1,h2,h3{
+  font-family:"Fraunces",Georgia,"Times New Roman",serif;
+  color:var(--ink);
+  margin:0;
+  text-wrap:balance;
+  font-weight:650;
+}
+em{font-style:italic;color:var(--terracotta-dark);}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+.eyebrow{
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--olive);
+}
+.section{padding:56px 0;}
+.section.soft{background:var(--paper-soft);}
+.section.dark{background:var(--ink);color:var(--paper);}
+.section.dark h2{color:var(--paper);}
+.center{text-align:center;}
+.stack{display:flex;flex-direction:column;gap:14px;}
+
+/* ---------- Urgency bar ---------- */
+.urgency{
+  position:sticky;top:0;z-index:40;
+  background:var(--terracotta);
+  color:#fff;
+  padding:9px 16px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  flex-wrap:wrap;
+}
+.urgency .timer{
+  font-variant-numeric:tabular-nums;
+  background:rgba(255,255,255,.18);
+  padding:2px 8px;
+  border-radius:6px;
+  letter-spacing:.03em;
+}
+
+/* ---------- Brand mark ---------- */
+.brandbar{padding:18px 0 0;text-align:center;}
+.brandmark{
+  font-family:"Fraunces",serif;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:var(--olive);
+}
+.brandmark::before{content:"♡ ";}
+
+/* ---------- Hero ---------- */
+.hero{padding:20px 0 40px;position:relative;overflow:hidden;}
+.hero .blob{
+  position:absolute;
+  width:340px;height:340px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--rose-pale), transparent 70%);
+  top:-140px;right:-120px;
+  z-index:0;
+}
+.hero .inner{position:relative;z-index:1;}
+.hero h1{
+  font-size:clamp(30px,7vw,42px);
+  line-height:1.08;
+  margin-top:14px;
+}
+.hero .sub{
+  margin-top:16px;
+  font-size:16.5px;
+  color:var(--ink-soft);
+  max-width:46ch;
+}
+.chip-row{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:20px;
+}
+.chip{
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:7px 13px;
+  border-radius:999px;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--olive);
+  display:flex;align-items:center;gap:6px;
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--terracotta);
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  padding:17px 26px;
+  border-radius:16px;
+  border:none;
+  box-shadow:0 14px 28px -12px rgba(200,104,95,.55);
+  width:100%;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 18px 32px -12px rgba(200,104,95,.65);}
+.btn:active{transform:translateY(0);}
+.btn.ghost{
+  background:transparent;
+  color:var(--terracotta-dark);
+  border:1.5px solid var(--terracotta);
+  box-shadow:none;
+}
+.btn.dark{background:var(--olive);box-shadow:0 14px 28px -12px rgba(86,95,61,.5);}
+.btn.small{padding:12px 18px;font-size:14px;width:auto;}
+.microtrust{
+  margin-top:12px;
+  font-size:12px;
+  color:var(--ink-soft);
+  text-align:center;
+}
+
+.hero-cta{margin-top:26px;}
+.hero-cover{
+  margin-top:32px;
+  position:relative;
+}
+.hero-cover img{
+  border-radius:20px;
+  box-shadow:var(--shadow);
+  transform:rotate(-2deg);
+  border:6px solid var(--card);
+}
+.hero-cover .tag{
+  position:absolute;
+  bottom:-14px;right:14px;
+  background:var(--olive);
+  color:var(--paper);
+  font-size:12px;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:12px;
+  transform:rotate(3deg);
+  box-shadow:var(--shadow);
+}
+
+/* ---------- Section headings ---------- */
+.head{max-width:48ch;margin:0 auto 30px;text-align:center;}
+.head h2{font-size:clamp(22px,5vw,28px);margin-top:8px;line-height:1.15;}
+.head .lede{margin-top:10px;font-size:15px;color:var(--ink-soft);}
+
+/* ---------- Esteira (page preview conveyor) ---------- */
+.esteira{
+  overflow:hidden;
+  margin-top:28px;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.esteira-track{
+  display:flex;align-items:center;gap:18px;
+  width:max-content;
+  padding:8px 0;
+  animation:esteira-scroll 34s linear infinite;
+}
+.esteira:hover .esteira-track{animation-play-state:paused;}
+.esteira-track img{
+  flex:none;
+  height:250px;width:auto;
+  border-radius:14px;
+  border:5px solid var(--card);
+  box-shadow:var(--shadow);
+}
+@keyframes esteira-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@media(max-width:480px){
+  .esteira-track img{height:190px;}
+}
+@media(prefers-reduced-motion:reduce){
+  .esteira-track{animation:none;}
+}
+.demo-caption{margin-top:18px;font-size:13.5px;color:var(--ink-soft);text-align:center;}
+
+/* ---------- Value stack ---------- */
+.value-list{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+.value-item{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:14px 16px;
+}
+.value-item .ico{
+  width:34px;height:34px;flex:none;
+  border-radius:10px;
+  background:var(--olive-soft);
+  color:var(--olive);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.value-item .txt strong{display:block;font-size:14.5px;}
+.value-item .txt span{font-size:13px;color:var(--ink-soft);}
+
+.bonus-card{
+  margin-top:16px;
+  display:flex;gap:14px;align-items:center;
+  background:linear-gradient(135deg,#fff, var(--rose-pale) 140%);
+  border:1px solid var(--rose-pale);
+  border-radius:var(--radius-md);
+  padding:14px;
+}
+.bonus-card img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:none;box-shadow:0 6px 14px -6px rgba(46,38,32,.3);}
+.bonus-card .txt{flex:1;}
+.bonus-card .txt .label{font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--gold);text-transform:uppercase;}
+.bonus-card .txt strong{display:block;font-size:14.5px;margin-top:2px;}
+.bonus-card .price{text-align:right;flex:none;}
+.bonus-card .was{font-size:12px;color:var(--ink-soft);text-decoration:line-through;}
+.bonus-card .now{font-size:13px;font-weight:800;color:var(--olive);}
+
+/* ---------- Testimonials ---------- */
+.testi-note{text-align:center;font-size:11.5px;color:var(--ink-soft);opacity:.75;margin-top:-16px;margin-bottom:26px;}
+.testi-scroll{
+  display:flex;gap:14px;overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:4px 20px 10px;
+  margin:0 -20px;
+}
+.testi-scroll::-webkit-scrollbar{display:none;}
+.testi-card{
+  scroll-snap-align:start;
+  flex:none;width:78%;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius-md);
+  padding:18px;
+}
+.testi-card .who{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.testi-card .avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--olive);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;flex:none;
+}
+.testi-card .who strong{display:block;font-size:14px;}
+.testi-card .who span{font-size:12px;color:var(--ink-soft);}
+.testi-card .stars{color:var(--gold);font-size:13px;margin-bottom:8px;letter-spacing:1px;}
+.testi-card p{font-size:14px;color:var(--ink);}
+
+/* ---------- Pricing ---------- */
+.plans{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
+.plan{
+  position:relative;
+  background:var(--card);
+  border:1.5px solid var(--line);
+  border-radius:var(--radius-lg);
+  padding:22px 20px 20px;
+}
+.plan.featured{
+  border-color:var(--terracotta);
+  box-shadow:var(--shadow);
+}
+.plan .ribbon{
+  position:absolute;top:-13px;left:20px;
+  background:var(--terracotta);
+  color:#fff;font-size:11.5px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:6px 12px;border-radius:999px;
+}
+.plan .name{font-size:13px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+.plan .price{margin-top:6px;display:flex;align-items:baseline;gap:8px;}
+.plan .price .now{font-family:"Fraunces",serif;font-size:34px;font-weight:650;}
+.plan .price .was{font-size:15px;color:var(--ink-soft);text-decoration:line-through;}
+.plan .feats{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;}
+.plan .feats li{display:flex;gap:9px;font-size:13.5px;align-items:flex-start;}
+.plan .feats li::before{content:"✓";color:var(--olive);font-weight:800;flex:none;}
+.plan .cta{margin-top:18px;}
+
+/* ---------- Guarantee ---------- */
+.guarantee-wrap{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  background:var(--olive-soft);
+  border-radius:var(--radius-lg);
+  padding:34px 22px 30px;
+}
+.badge-7d{
+  width:172px;height:auto;flex:none;
+  filter:drop-shadow(0 14px 22px rgba(46,38,32,.28));
+}
+.guarantee-copy{margin-top:16px;}
+.guarantee-copy h3{
+  font-size:19px;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+}
+.guarantee-copy .divider{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin:12px 0 14px;
+  color:var(--olive);font-size:12px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.guarantee-copy .divider::before,.guarantee-copy .divider::after{
+  content:"";height:1px;width:28px;background:var(--olive);opacity:.35;
+}
+.guarantee-copy p{font-size:13.5px;color:var(--ink-soft);max-width:36ch;margin:0 auto;}
+.trust-row{
+  display:flex;justify-content:center;gap:20px;flex-wrap:wrap;
+  margin-top:26px;padding-top:24px;
+  border-top:1px solid rgba(86,95,61,.2);
+  width:100%;
+}
+.trust-item{display:flex;flex-direction:column;align-items:center;gap:9px;width:104px;}
+.trust-item .ic{
+  width:50px;height:50px;border-radius:50%;
+  background:var(--olive);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+}
+.trust-item strong{font-size:12.5px;}
+.trust-item span{font-size:11px;color:var(--ink-soft);line-height:1.35;}
+
+/* ---------- FAQ ---------- */
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-item:first-child{border-top:1px solid var(--line);}
+.faq-q{
+  width:100%;background:none;border:none;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;padding:17px 2px;
+  font-size:14.5px;font-weight:600;text-align:left;color:var(--ink);
+}
+.faq-q .plus{
+  flex:none;font-size:18px;color:var(--terracotta);
+  transition:transform .2s ease;
+}
+.faq-item.open .faq-q .plus{transform:rotate(45deg);}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .25s ease;
+}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding:0 2px 16px;font-size:13.5px;color:var(--ink-soft);}
+
+/* ---------- Final CTA ---------- */
+.final-cta{
+  background:var(--olive);
+  color:var(--paper);
+  border-radius:var(--radius-lg);
+  padding:32px 24px;
+  text-align:center;
+}
+.final-cta h2{color:var(--paper);font-size:24px;}
+.final-cta p{margin-top:8px;color:#DCE0CC;font-size:14px;}
+.final-cta .btn{margin-top:20px;}
+
+/* ---------- Footer ---------- */
+footer{padding:36px 0 20px;text-align:center;}
+footer .disclaimer{font-size:11px;color:var(--ink-soft);max-width:52ch;margin:0 auto;line-height:1.6;}
+footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
+
+/* ---------- Sticky bottom CTA ---------- */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--card);
+  border-top:1px solid var(--line);
+  padding:10px 16px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 -10px 24px -12px rgba(46,38,32,.18);
+}
+.sticky-cta .p{flex:none;}
+.sticky-cta .p .now{font-family:"Fraunces",serif;font-weight:650;font-size:18px;}
+.sticky-cta .p .label{font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
+.sticky-cta .btn{padding:13px 18px;font-size:14px;}
+
+/* ---------- Modal (order bump) ---------- */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(46,38,32,.55);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s ease;
+}
+.modal-overlay.show{opacity:1;pointer-events:auto;}
+.modal{
+  background:var(--paper);
+  border-radius:var(--radius-lg);
+  max-width:380px;width:100%;
+  padding:26px 22px 22px;
+  position:relative;
+  transform:translateY(10px);
+  transition:transform .2s ease;
+  max-height:88vh;overflow-y:auto;
+}
+.modal-overlay.show .modal{transform:translateY(0);}
+.modal .close{
+  position:absolute;top:14px;right:16px;
+  background:none;border:none;font-size:20px;color:var(--ink-soft);
+  line-height:1;
+}
+.modal .wait{
+  color:var(--terracotta-dark);font-weight:800;font-size:13px;
+  text-transform:uppercase;letter-spacing:.05em;text-align:center;
+}
+.modal h3{text-align:center;margin-top:8px;font-size:20px;}
+.modal .price{
+  text-align:center;margin-top:14px;
+  display:flex;align-items:baseline;justify-content:center;gap:8px;
+}
+.modal .price .was{font-size:14px;color:var(--ink-soft);text-decoration:line-through;}
+.modal .price .now{font-family:"Fraunces",serif;font-size:30px;font-weight:650;color:var(--olive);}
+.modal .off{
+  display:block;text-align:center;font-size:12px;font-weight:800;color:#fff;
+  background:var(--olive);width:fit-content;margin:8px auto 0;padding:3px 10px;border-radius:999px;
+}
+.modal .feats{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.modal .feats li{display:flex;gap:8px;font-size:13.5px;}
+.modal .feats li::before{content:"✓";color:var(--olive);font-weight:800;}
+.modal .decline{
+  display:block;text-align:center;margin-top:14px;
+  font-size:12px;color:var(--ink-soft);text-decoration:underline;
+}
+
+@media(min-width:640px){
+  .plans{flex-direction:row;}
+  .plan{flex:1;}
+  .hero .sub{margin-left:auto;margin-right:auto;}
+  .hero.center-desktop{text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="urgency">
+  🎁 Bônus grátis por tempo limitado — expira em <span class="timer" id="timer">24:00:00</span>
+</div>
+
+<div class="brandbar">
+  <span class="brandmark">Caderneta da Gestante</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob"></div>
+  <div class="wrap inner">
+    <p class="eyebrow">✎ caderneta para imprimir</p>
+    <h1>Organize toda a sua gravidez em <em>um único lugar</em>, com carinho</h1>
+    <p class="sub">140 páginas para registrar consultas, exames, sintomas e memórias — do pré-natal ao pós-parto. Um arquivo pronto pra imprimir e virar sua caderneta física, de capa a capa.</p>
+
+    <div class="chip-row">
+      <span class="chip">♡ Visual delicado</span>
+      <span class="chip">✓ Conteúdo organizado</span>
+      <span class="chip">✎ Pronta para imprimir</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn" href="#planos">Quero organizar minha gestação →</a>
+      <p class="microtrust">Arquivo em PDF de alta qualidade · pronto para imprimir em casa ou gráfica · acesso imediato após a compra</p>
+    </div>
+
+    <div class="hero-cover">
+      <img src="assets/preview/capa.webp" alt="Capa da Caderneta da Gestante" width="420" height="420" loading="eager">
+      <span class="tag">140 páginas ✎</span>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO CAROUSEL -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">por dentro</p>
+      <h2>Veja como é, antes de comprar</h2>
+      <p class="lede">Prévia do arquivo pronto pra imprimir — uma pequena amostra do estilo e da organização das páginas.</p>
+    </div>
+  </div>
+
+  <div class="esteira">
+    <div class="esteira-track">
+      <img src="assets/preview/capa.webp" alt="Capa">
+      <img src="assets/preview/trimestre.webp" alt="Abertura do primeiro trimestre">
+      <img src="assets/preview/calendario.webp" alt="Calendário da gestação">
+      <img src="assets/preview/semana.webp" alt="Acompanhamento semanal">
+      <img src="assets/preview/ultrassons.webp" alt="Álbum de ultrassons">
+      <img src="assets/preview/plano-parto.webp" alt="Plano de parto">
+      <img src="assets/preview/mala-maternidade.webp" alt="Checklist da mala da maternidade">
+      <img src="assets/preview/cartinha.webp" alt="Cartinha para o bebê">
+      <img src="assets/preview/capa.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/trimestre.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/calendario.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/semana.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/ultrassons.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/plano-parto.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/mala-maternidade.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/cartinha.webp" alt="" aria-hidden="true">
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="demo-caption">Capa · 1º trimestre · Calendário · Semana a semana · Ultrassons · Plano de parto · Mala da maternidade · Cartinha para o bebê</p>
+  </div>
+</section>
+
+<!-- O QUE VOCÊ VAI RECEBER -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">valor completo</p>
+      <h2>O que vem dentro da sua caderneta impressa</h2>
+    </div>
+
+    <div class="value-list">
+      <div class="value-item">
+        <div class="ico">✎</div>
+        <div class="txt"><strong>Dados e contatos importantes</strong><span>Gestante, médicos, maternidade e apoio.</span></div>
+      </div>
+      <div class="value-item">
+        <div class="ico">✓</div>
+        <div class="txt"><strong>Acompanhamento semana a semana</strong><span>Sintomas, tamanho do bebê, sensações e anotações — semanas 1 a 40.</span></div>
+      </div>
+      <div class="value-item">
+        <div class="ico">🩺</div>
+        <div class="txt"><strong>Consultas, exames e ultrassons</strong><span>Espaço próprio para cada registro do pré-natal.</span></div>
+      </div>
+      <div class="value-item">
+        <div class="ico">🧸</div>
+        <div class="txt"><strong>Plano de parto e mala da maternidade</strong><span>Checklists para não esquecer nada importante.</span></div>
+      </div>
+      <div class="value-item">
+        <div class="ico">♡</div>
+        <div class="txt"><strong>Diário do bebê no pós-parto</strong><span>Sono, alimentação, desenvolvimento e primeiras memórias.</span></div>
+      </div>
+    </div>
+
+    <div class="bonus-card">
+      <img src="assets/bonus/enxoval-capa.webp" alt="Kit Completo de Enxoval do Bebê">
+      <div class="txt">
+        <span class="label">Bônus 01 · grátis</span>
+        <strong>Kit Completo de Enxoval do Bebê (40 páginas)</strong>
+      </div>
+      <div class="price"><span class="was">R$37</span><span class="now">grátis</span></div>
+    </div>
+    <div class="bonus-card">
+      <img src="assets/bonus/diario-capa.webp" alt="Diário de Memórias do Bebê">
+      <div class="txt">
+        <span class="label">Bônus 02 · grátis</span>
+        <strong>Diário de Memórias do Bebê (50 páginas)</strong>
+      </div>
+      <div class="price"><span class="was">R$37</span><span class="now">grátis</span></div>
+    </div>
+
+    <div class="hero-cta" style="margin-top:26px;">
+      <a class="btn" href="#planos">Quero minha caderneta + bônus →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">quem já usa</p>
+      <h2>Mamães que organizaram a gestação por aqui</h2>
+    </div>
+    <p class="testi-note">* depoimentos ilustrativos — substitua pelas avaliações reais das suas clientes antes de publicar</p>
+  </div>
+  <div class="testi-scroll">
+    <div class="testi-card">
+      <div class="who"><div class="avatar">C</div><div><strong>Camila M.</strong><span>32 semanas</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>"Uso todo dia pra anotar as consultas. Ficou muito mais fácil lembrar de tudo que o médico fala."</p>
+    </div>
+    <div class="testi-card">
+      <div class="who"><div class="avatar">F</div><div><strong>Fernanda R.</strong><span>pós-parto</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>"O checklist da mala da maternidade salvou minha vida na reta final. Recomendo muito."</p>
+    </div>
+    <div class="testi-card">
+      <div class="who"><div class="avatar">J</div><div><strong>Juliana S.</strong><span>1º trimestre</span></div></div>
+      <div class="stars">★★★★★</div>
+      <p>"Simples de preencher e muito fofa. Já virou parte da minha rotina de grávida."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="planos">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">escolha seu plano</p>
+      <h2>Comece a organizar sua gestação hoje</h2>
+    </div>
+
+    <div class="plans">
+      <div class="plan" id="planBasico">
+        <p class="name">Kit inicial</p>
+        <div class="price"><span class="now">R$29,90</span></div>
+        <ul class="feats">
+          <li>Caderneta completa em PDF (140 páginas)</li>
+          <li>Pronta para imprimir em casa ou gráfica</li>
+          <li>Acesso imediato após a compra</li>
+        </ul>
+        <div class="cta">
+          <a class="btn ghost" href="#checkout-basico" id="btnBasico">Quero o kit inicial</a>
+        </div>
+      </div>
+
+      <div class="plan featured" id="planCompleto">
+        <span class="ribbon">Mais escolhida</span>
+        <p class="name">Kit completo + bônus</p>
+        <div class="price"><span class="was">R$103,90</span><span class="now">R$67,00</span></div>
+        <ul class="feats">
+          <li>Caderneta completa em PDF (140 páginas)</li>
+          <li>Bônus: Kit Completo de Enxoval do Bebê (40 páginas)</li>
+          <li>Bônus: Diário de Memórias do Bebê (50 páginas)</li>
+          <li>Pronta para imprimir + acesso imediato</li>
+        </ul>
+        <div class="cta">
+          <a class="btn" href="#checkout-completo" id="btnCompleto">Quero completo + bônus →</a>
+        </div>
+      </div>
+    </div>
+    <p class="microtrust">🔒 Compra segura pelo checkout · pagamento único, sem assinatura</p>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="guarantee-wrap">
+      <svg class="badge-7d" viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Selo de garantia incondicional de 7 dias">
+        <polygon points="98,192 70,192 62,286 90,258 100,286" fill="var(--olive)" stroke="var(--gold)" stroke-width="2"/>
+        <polygon points="142,192 170,192 178,286 150,258 140,286" fill="var(--olive)" stroke="var(--gold)" stroke-width="2"/>
+        <circle cx="120" cy="108" r="96" fill="var(--gold)"/>
+        <circle cx="120" cy="108" r="84" fill="var(--olive)"/>
+        <circle cx="120" cy="108" r="89" fill="none" stroke="var(--paper)" stroke-width="1.5" stroke-dasharray="1 6" opacity=".55"/>
+        <g fill="var(--gold)">
+          <path d="M67 46 l2.6 6.4 6.4 2.6 -6.4 2.6 -2.6 6.4 -2.6 -6.4 -6.4 -2.6 6.4 -2.6 Z"/>
+          <path d="M173 46 l2.6 6.4 6.4 2.6 -6.4 2.6 -2.6 6.4 -2.6 -6.4 -6.4 -2.6 6.4 -2.6 Z"/>
+        </g>
+        <text x="120" y="76" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12.5" letter-spacing="2" fill="var(--paper)">GARANTIA DE</text>
+        <text x="120" y="144" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-weight="650" font-size="60" fill="var(--paper)">7</text>
+        <text x="120" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="15" letter-spacing="4" fill="var(--gold)">DIAS</text>
+      </svg>
+
+      <div class="guarantee-copy">
+        <h3>Teste sem risco por 7 dias</h3>
+        <div class="divider">✓ compra 100% garantida</div>
+        <p>Se por qualquer motivo o material não fizer sentido pra você, devolvemos 100% do valor. Sem perguntas, sem burocracia.</p>
+      </div>
+
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+          <strong>Compra segura</strong>
+          <span>Ambiente 100% seguro</span>
+        </div>
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <strong>Sem riscos</strong>
+          <span>Garantia incondicional de 7 dias</span>
+        </div>
+        <div class="trust-item">
+          <div class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+          <strong>Entrega imediata</strong>
+          <span>Acesso após a compra</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">dúvidas frequentes</p>
+      <h2>Antes de garantir a sua</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">O produto é físico ou digital?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Você recebe um arquivo digital (PDF) pronto para imprimir — não enviamos a versão já impressa pelo correio. É só imprimir em casa ou em uma gráfica para ter sua caderneta física, do jeitinho que você imagina.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">A caderneta substitui o acompanhamento médico?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Não. Ela é uma ferramenta de organização pessoal e não substitui consultas, exames ou orientações da sua equipe médica.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Posso imprimir as páginas?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Sim — é esse o uso pensado para a caderneta! O arquivo vem em alta qualidade, pronto para imprimir em casa ou em gráfica e preencher à mão, página por página.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Como recebo o material após a compra?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Assim que o pagamento é aprovado, o acesso é liberado automaticamente por e-mail para download imediato.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Existe garantia?<span class="plus">+</span></button>
+        <div class="faq-a"><p>Sim, você tem 7 dias de garantia incondicional para solicitar reembolso caso o material não seja o que esperava.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>Sua caderneta está esperando por você</h2>
+      <p>Um pequeno investimento para organizar uma grande história — com bônus grátis por tempo limitado.</p>
+      <a class="btn" href="#planos">Quero minha caderneta agora →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disclaimer">Este material possui finalidade informativa e de organização pessoal e não substitui acompanhamento pré-natal, atendimento médico, diagnóstico ou tratamento profissional.</p>
+    <p class="credit">Caderneta da Gestante · feita com carinho para sua jornada</p>
+  </div>
+</footer>
+
+<!-- STICKY BOTTOM CTA -->
+<div class="sticky-cta">
+  <div class="p"><span class="label">completo + bônus</span><span class="now">R$67,00</span></div>
+  <a class="btn" href="#planos" style="flex:1;">Quero a minha →</a>
+</div>
+
+<!-- ORDER BUMP MODAL -->
+<div class="modal-overlay" id="bumpOverlay">
+  <div class="modal">
+    <button class="close" id="bumpClose" aria-label="Fechar">×</button>
+    <p class="wait">Espere!</p>
+    <h3>Temos uma oferta especial pra você</h3>
+    <div class="price">
+      <span class="was">R$67,00</span>
+      <span class="now">R$49,90</span>
+    </div>
+    <span class="off">25% OFF só nesta página</span>
+    <ul class="feats">
+      <li>Caderneta completa em PDF (140 páginas)</li>
+      <li>Bônus: Kit Completo de Enxoval do Bebê (40 páginas)</li>
+      <li>Bônus: Diário de Memórias do Bebê (50 páginas)</li>
+    </ul>
+    <a class="btn dark" href="#checkout-bump-completo" style="margin-top:20px;">Quero o upgrade por R$49,90</a>
+    <a class="decline" href="#checkout-basico-confirm">Não, quero só o kit inicial sem os bônus</a>
+  </div>
+</div>
+
+<script>
+// Evergreen 24h urgency countdown (per-visitor, resets after expiry)
+(function(){
+  var KEY = 'cg_deadline';
+  var el = document.getElementById('timer');
+  var storage = null;
+  try{ storage = window.localStorage; storage.getItem(KEY); }catch(e){ storage = null; }
+  var end = storage ? storage.getItem(KEY) : null;
+  if(!end || Date.now() > +end){
+    end = Date.now() + 24*60*60*1000;
+    if(storage){ try{ storage.setItem(KEY, end); }catch(e){} }
+  }
+  function tick(){
+    var diff = Math.max(0, +end - Date.now());
+    var h = Math.floor(diff/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    el.textContent = [h,m,s].map(function(n){return String(n).padStart(2,'0');}).join(':');
+    if(diff <= 0 && storage){
+      try{ storage.removeItem(KEY); }catch(e){}
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var item = btn.closest('.faq-item');
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(o){ o.classList.remove('open'); });
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+
+// Order bump modal — triggers when picking the basic plan
+(function(){
+  var overlay = document.getElementById('bumpOverlay');
+  var btnBasico = document.getElementById('btnBasico');
+  var close = document.getElementById('bumpClose');
+  btnBasico.addEventListener('click', function(e){
+    e.preventDefault();
+    overlay.classList.add('show');
+  });
+  close.addEventListener('click', function(){ overlay.classList.remove('show'); });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.classList.remove('show'); });
+})();
+</script>
+
+</body>
+</html>
