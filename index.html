@@ -411,14 +411,16 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   position:fixed;left:0;right:0;bottom:0;z-index:50;
   background:var(--card);
   border-top:1px solid var(--line);
-  padding:10px 16px;
-  display:flex;align-items:center;gap:12px;
   box-shadow:0 -10px 24px -12px rgba(46,38,32,.18);
 }
-.sticky-cta .p{flex:none;}
-.sticky-cta .p .now{font-family:"Fraunces",serif;font-weight:650;font-size:18px;}
-.sticky-cta .p .label{font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
-.sticky-cta .btn{padding:13px 18px;font-size:14px;}
+.sticky-cta .wrap{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 20px;
+}
+.sticky-cta .p{flex:none;display:flex;flex-direction:column;gap:1px;min-width:88px;}
+.sticky-cta .p .now{font-family:"Fraunces",serif;font-weight:650;font-size:19px;line-height:1.15;}
+.sticky-cta .p .label{font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
+.sticky-cta .btn{flex:1;padding:13px 18px;font-size:14px;max-width:320px;}
 
 /* ---------- Modal (order bump) ---------- */
 .modal-overlay{
@@ -770,8 +772,10 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
 
 <!-- STICKY BOTTOM CTA -->
 <div class="sticky-cta">
-  <div class="p"><span class="label">completo + bônus</span><span class="now">R$67,00</span></div>
-  <a class="btn" href="#planos" style="flex:1;">Quero a minha →</a>
+  <div class="wrap">
+    <div class="p"><span class="label">completo + bônus</span><span class="now">R$67,00</span></div>
+    <a class="btn" href="#planos">Quero a minha →</a>
+  </div>
 </div>
 
 <!-- ORDER BUMP MODAL -->
