@@ -269,28 +269,60 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ---------- Testimonials ---------- */
 .testi-scroll{
-  display:flex;gap:14px;overflow-x:auto;
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:flex;gap:16px;overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding:4px 20px 10px;
-  margin:0 -20px;
 }
 .testi-scroll::-webkit-scrollbar{display:none;}
 .testi-card{
   scroll-snap-align:start;
-  flex:none;width:66%;max-width:280px;
+  flex:none;width:85%;max-width:420px;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius-md);
   overflow:hidden;
   box-shadow:var(--shadow);
 }
-.testi-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;}
+.testi-card .shot{position:relative;}
+.testi-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in;}
+.testi-card .zoom-hint{
+  position:absolute;bottom:10px;right:10px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(46,38,32,.55);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+  backdrop-filter:blur(2px);
+}
 .testi-card .cap{
-  padding:10px 14px 13px;
-  font-size:12px;color:var(--ink-soft);
+  padding:11px 14px 14px;
+  font-size:13px;color:var(--ink-soft);
   text-align:center;
 }
 .testi-card .cap strong{color:var(--ink);font-weight:700;}
+
+/* ---------- Lightbox ---------- */
+.lightbox-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(28,22,18,.9);
+  display:flex;align-items:center;justify-content:center;
+  padding:28px;
+  opacity:0;pointer-events:none;
+  transition:opacity .2s ease;
+}
+.lightbox-overlay.show{opacity:1;pointer-events:auto;}
+.lightbox-overlay img{
+  max-width:92vw;max-height:88vh;width:auto;
+  border-radius:16px;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+}
+.lightbox-close{
+  position:absolute;top:18px;right:20px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#fff;
+  border:none;font-size:22px;line-height:1;
+}
 
 /* ---------- Pricing ---------- */
 .plans{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
@@ -611,16 +643,25 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   </div>
   <div class="testi-scroll">
     <div class="testi-card">
-      <img src="assets/testimonials/whatsapp-julia.webp" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
-      <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
+      <div class="shot">
+        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
+        <span class="zoom-hint">⊕</span>
+      </div>
+      <p class="cap"><strong>Julia</strong> · via WhatsApp · toque para ampliar</p>
     </div>
     <div class="testi-card">
-      <img src="assets/testimonials/whatsapp-maria.webp" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
-      <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
+      <div class="shot">
+        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
+        <span class="zoom-hint">⊕</span>
+      </div>
+      <p class="cap"><strong>Maria</strong> · via WhatsApp · toque para ampliar</p>
     </div>
     <div class="testi-card">
-      <img src="assets/testimonials/whatsapp-cliente.webp" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
-      <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
+      <div class="shot">
+        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
+        <span class="zoom-hint">⊕</span>
+      </div>
+      <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp · toque para ampliar</p>
     </div>
   </div>
 </section>
@@ -770,6 +811,12 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   </div>
 </div>
 
+<!-- TESTIMONIAL LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
 <!-- ORDER BUMP MODAL -->
 <div class="modal-overlay" id="bumpOverlay">
   <div class="modal">
@@ -826,6 +873,23 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
     if(!wasOpen) item.classList.add('open');
   });
 });
+
+// Testimonial lightbox — tap a print to see it full size
+(function(){
+  var overlay = document.getElementById('lightboxOverlay');
+  var img = document.getElementById('lightboxImg');
+  var close = document.getElementById('lightboxClose');
+  document.querySelectorAll('.testi-card img').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      img.src = thumb.getAttribute('data-full') || thumb.src;
+      img.alt = thumb.alt;
+      overlay.classList.add('show');
+    });
+  });
+  function closeLightbox(){ overlay.classList.remove('show'); }
+  close.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeLightbox(); });
+})();
 
 // Order bump modal — triggers when picking the basic plan
 (function(){
