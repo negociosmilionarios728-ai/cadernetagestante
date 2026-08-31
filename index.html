@@ -277,23 +277,20 @@ button{font-family:inherit;cursor:pointer;}
 .testi-scroll::-webkit-scrollbar{display:none;}
 .testi-card{
   scroll-snap-align:start;
-  flex:none;width:78%;
+  flex:none;width:66%;max-width:280px;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius-md);
-  padding:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
 }
-.testi-card .who{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.testi-card .avatar{
-  width:38px;height:38px;border-radius:50%;
-  background:var(--olive);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;font-size:14px;flex:none;
+.testi-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;}
+.testi-card .cap{
+  padding:10px 14px 13px;
+  font-size:12px;color:var(--ink-soft);
+  text-align:center;
 }
-.testi-card .who strong{display:block;font-size:14px;}
-.testi-card .who span{font-size:12px;color:var(--ink-soft);}
-.testi-card .stars{color:var(--gold);font-size:13px;margin-bottom:8px;letter-spacing:1px;}
-.testi-card p{font-size:14px;color:var(--ink);}
+.testi-card .cap strong{color:var(--ink);font-weight:700;}
 
 /* ---------- Pricing ---------- */
 .plans{display:flex;flex-direction:column;gap:16px;margin-top:8px;}
@@ -614,19 +611,16 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   </div>
   <div class="testi-scroll">
     <div class="testi-card">
-      <div class="who"><div class="avatar">J</div><div><strong>Julia</strong><span>via WhatsApp</span></div></div>
-      <div class="stars">★★★★★</div>
-      <p>"Já imprimi as três cadernetas aqui, a impressão ficou perfeita e o material é maravilhoso. Já comecei a preencher a de gestante e me emocionei."</p>
+      <img src="assets/testimonials/whatsapp-julia.webp" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
+      <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
     </div>
     <div class="testi-card">
-      <div class="who"><div class="avatar">M</div><div><strong>Maria</strong><span>via WhatsApp</span></div></div>
-      <div class="stars">★★★★★</div>
-      <p>"Comecei pela Caderneta de Gestante e já estou apaixonada, é tudo muito completo, do jeitinho que eu queria. A do Enxoval também está me ajudando muito a organizar as coisas."</p>
+      <img src="assets/testimonials/whatsapp-maria.webp" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
+      <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
     </div>
     <div class="testi-card">
-      <div class="who"><div class="avatar">C</div><div><strong>Cliente verificada</strong><span>via WhatsApp</span></div></div>
-      <div class="stars">★★★★★</div>
-      <p>"Eu tava procurando uma caderneta assim fazia tempo. Amei que já vem tudo prontinho, não precisei ficar montando nada. Já comecei a preencher e tô muito feliz de poder guardar cada fase."</p>
+      <img src="assets/testimonials/whatsapp-cliente.webp" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
+      <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
     </div>
   </div>
 </section>
