@@ -579,6 +579,27 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   .hero.center-desktop{text-align:center;}
 }
 </style>
+
+<!-- Meta Pixel Code (Caderneta Feliz) -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1534767062029118');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+  content_name: 'Caderneta da Gestante',
+  content_category: 'Produto Digital',
+  value: 67.00,
+  currency: 'BRL'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1534767062029118&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -930,8 +951,8 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
       <li>Bônus: Kit Completo de Enxoval do Bebê (40 páginas)</li>
       <li>Bônus: Diário de Memórias do Bebê (50 páginas)</li>
     </ul>
-    <a class="btn dark" href="https://zuckpay.com.br/checkout/caderneta-da-gestante-com-bonus-com-desconto" style="margin-top:20px;">Quero o upgrade por R$49,90</a>
-    <a class="decline" href="https://zuckpay.com.br/checkout/caderneta-da-gestante">Não, quero só o kit inicial sem os bônus</a>
+    <a class="btn dark" href="https://zuckpay.com.br/checkout/caderneta-da-gestante-com-bonus-com-desconto" id="btnBumpUpgrade" style="margin-top:20px;">Quero o upgrade por R$49,90</a>
+    <a class="decline" href="https://zuckpay.com.br/checkout/caderneta-da-gestante" id="btnBumpDecline">Não, quero só o kit inicial sem os bônus</a>
   </div>
 </div>
 
@@ -1006,6 +1027,24 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
   function closeLightbox(){ overlay.classList.remove('show'); }
   close.addEventListener('click', closeLightbox);
   overlay.addEventListener('click', function(e){ if(e.target === overlay) closeLightbox(); });
+})();
+
+// Meta Pixel -- InitiateCheckout on every checkout-bound button
+(function(){
+  if (typeof fbq !== 'function') return;
+  var events = [
+    ['btnBasico', 29.90, 'Kit inicial'],
+    ['btnCompleto', 67.00, 'Kit completo + bônus'],
+    ['btnBumpUpgrade', 49.90, 'Upgrade completo com desconto'],
+    ['btnBumpDecline', 29.90, 'Kit inicial (recusou upgrade)']
+  ];
+  events.forEach(function(row){
+    var el = document.getElementById(row[0]);
+    if (!el) return;
+    el.addEventListener('click', function(){
+      fbq('track', 'InitiateCheckout', { value: row[1], currency: 'BRL', content_name: row[2] });
+    });
+  });
 })();
 
 // Order bump modal — triggers when picking the basic plan
