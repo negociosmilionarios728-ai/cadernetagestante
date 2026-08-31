@@ -8,7 +8,9 @@
 <meta name="description" content="Caderneta para imprimir e acompanhar a gravidez, o pré-natal e o pós-parto. 77 páginas, acesso imediato, com bônus grátis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,650;1,9..144,500&family=Inter:wght@400;500;600;700;800;900&display=swap"></noscript>
 <style>
 
 /* ---------- Tokens ---------- */
@@ -44,7 +46,7 @@ body{
   line-height:1.5;
   padding-bottom:76px;
 }
-img{max-width:100%;display:block;}
+img{max-width:100%;height:auto;display:block;}
 h1,h2,h3{
   font-family:"Fraunces",Georgia,"Times New Roman",serif;
   color:var(--ink);
@@ -74,7 +76,7 @@ button{font-family:inherit;cursor:pointer;}
 /* ---------- Urgency bar ---------- */
 .urgency{
   position:sticky;top:0;z-index:40;
-  background:var(--terracotta);
+  background:var(--terracotta-dark);
   color:#fff;
   padding:9px 16px;
   text-align:center;
@@ -141,7 +143,7 @@ button{font-family:inherit;cursor:pointer;}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  background:var(--terracotta);
+  background:var(--terracotta-dark);
   color:#fff;
   font-weight:800;
   font-size:16px;
@@ -368,17 +370,24 @@ button{font-family:inherit;cursor:pointer;}
 .plan .ribbon{
   position:absolute;top:-15px;left:20px;
   display:flex;align-items:center;gap:5px;
-  background:linear-gradient(100deg, var(--terracotta) 0%, var(--rose) 45%, var(--terracotta) 100%);
-  background-size:220% 100%;
+  background:var(--terracotta-dark);
   color:#fff;font-size:11.5px;font-weight:800;
   letter-spacing:.04em;text-transform:uppercase;
   padding:7px 14px;border-radius:999px;
-  box-shadow:0 8px 16px -6px rgba(200,104,95,.6);
+  box-shadow:0 8px 16px -6px rgba(168,82,74,.6);
+  overflow:hidden;
+}
+.plan .ribbon::after{
+  content:"";
+  position:absolute;top:0;left:0;
+  width:40%;height:100%;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.5), transparent);
+  transform:translateX(-180%) skewX(-20deg);
   animation:ribbon-shine 3.5s ease-in-out infinite;
 }
 @keyframes ribbon-shine{
-  0%,100%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
+  0%, 55%{transform:translateX(-180%) skewX(-20deg);}
+  100%{transform:translateX(380%) skewX(-20deg);}
 }
 #planCompleto .btn{
   font-size:16.5px;padding:18px 26px;
@@ -557,6 +566,7 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   <span class="brandmark">Caderneta da Gestante</span>
 </div>
 
+<main>
 <!-- HERO -->
 <section class="hero">
   <div class="blob"></div>
@@ -577,7 +587,7 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
     </div>
 
     <div class="hero-cover">
-      <img src="assets/preview/capa.webp" alt="Capa da Caderneta da Gestante" width="420" height="420" loading="eager">
+      <img src="assets/preview/capa.webp" alt="Capa da Caderneta da Gestante" width="640" height="960" loading="eager" fetchpriority="high">
       <span class="tag">77 páginas ✎</span>
     </div>
   </div>
@@ -595,22 +605,22 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
 
   <div class="esteira">
     <div class="esteira-track">
-      <img src="assets/preview/capa.webp" alt="Capa">
-      <img src="assets/preview/calendario.webp" alt="Calendário da gestação">
-      <img src="assets/preview/semana.webp" alt="Acompanhamento semana a semana">
-      <img src="assets/preview/exames.webp" alt="Controle de exames">
-      <img src="assets/preview/plano-parto.webp" alt="Plano de parto">
-      <img src="assets/preview/mala-maternidade.webp" alt="Checklist da mala da maternidade">
-      <img src="assets/preview/amamentacao.webp" alt="Controle de amamentação">
-      <img src="assets/preview/cartinha.webp" alt="Mensagens para o bebê">
-      <img src="assets/preview/capa.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/calendario.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/semana.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/exames.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/plano-parto.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/mala-maternidade.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/amamentacao.webp" alt="" aria-hidden="true">
-      <img src="assets/preview/cartinha.webp" alt="" aria-hidden="true">
+      <img src="assets/preview/capa-thumb.webp" alt="Capa" width="450" height="675" loading="lazy">
+      <img src="assets/preview/calendario.webp" alt="Calendário da gestação" width="450" height="675" loading="lazy">
+      <img src="assets/preview/semana.webp" alt="Acompanhamento semana a semana" width="450" height="675" loading="lazy">
+      <img src="assets/preview/exames.webp" alt="Controle de exames" width="450" height="675" loading="lazy">
+      <img src="assets/preview/plano-parto.webp" alt="Plano de parto" width="450" height="675" loading="lazy">
+      <img src="assets/preview/mala-maternidade.webp" alt="Checklist da mala da maternidade" width="450" height="675" loading="lazy">
+      <img src="assets/preview/amamentacao.webp" alt="Controle de amamentação" width="450" height="675" loading="lazy">
+      <img src="assets/preview/cartinha.webp" alt="Mensagens para o bebê" width="450" height="675" loading="lazy">
+      <img src="assets/preview/capa-thumb.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/calendario.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/semana.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/exames.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/plano-parto.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/mala-maternidade.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/amamentacao.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
+      <img src="assets/preview/cartinha.webp" alt="" aria-hidden="true" width="450" height="675" loading="lazy">
     </div>
   </div>
 
@@ -651,7 +661,7 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
     </div>
 
     <div class="bonus-card">
-      <img src="assets/bonus/enxoval-capa.webp" alt="Kit Completo de Enxoval do Bebê">
+      <img src="assets/bonus/enxoval-capa.webp" alt="Kit Completo de Enxoval do Bebê" width="220" height="220" loading="lazy">
       <div class="txt">
         <span class="label">Bônus 01 · grátis</span>
         <strong>Kit Completo de Enxoval do Bebê (40 páginas)</strong>
@@ -659,7 +669,7 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
       <div class="price"><span class="was">R$37</span><span class="now">grátis</span></div>
     </div>
     <div class="bonus-card">
-      <img src="assets/bonus/diario-capa.webp" alt="Diário de Memórias do Bebê">
+      <img src="assets/bonus/diario-capa.webp" alt="Diário de Memórias do Bebê" width="220" height="220" loading="lazy">
       <div class="txt">
         <span class="label">Bônus 02 · grátis</span>
         <strong>Diário de Memórias do Bebê (50 páginas)</strong>
@@ -685,43 +695,43 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
   <div class="testi-esteira">
     <div class="testi-esteira-track">
       <div class="testi-card">
-        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
+        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" width="480" height="480" loading="lazy" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
         <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card">
-        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
+        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" width="480" height="480" loading="lazy" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
         <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card">
-        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
+        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" width="480" height="480" loading="lazy" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
         <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card">
-        <img src="assets/testimonials/whatsapp-camila.webp" data-full="assets/testimonials/whatsapp-camila-full.webp" alt="Print de conversa no WhatsApp: Camila contando que imprimiu em casa, a qualidade do arquivo é ótima, as cores ficaram lindas e que recomendou pra irmã e duas amigas grávidas.">
+        <img src="assets/testimonials/whatsapp-camila.webp" data-full="assets/testimonials/whatsapp-camila-full.webp" width="480" height="480" loading="lazy" alt="Print de conversa no WhatsApp: Camila contando que imprimiu em casa, a qualidade do arquivo é ótima, as cores ficaram lindas e que recomendou pra irmã e duas amigas grávidas.">
         <p class="cap"><strong>Camila</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card">
-        <img src="assets/testimonials/whatsapp-ana.webp" data-full="assets/testimonials/whatsapp-ana-full.webp" alt="Print de conversa no WhatsApp: Ana contando que baixou e imprimiu em casa, ficou perfeito, a qualidade é ótima e o conteúdo muito completo.">
+        <img src="assets/testimonials/whatsapp-ana.webp" data-full="assets/testimonials/whatsapp-ana-full.webp" width="480" height="480" loading="lazy" alt="Print de conversa no WhatsApp: Ana contando que baixou e imprimiu em casa, ficou perfeito, a qualidade é ótima e o conteúdo muito completo.">
         <p class="cap"><strong>Ana</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" alt="">
+        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" width="480" height="480" loading="lazy" alt="">
         <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" alt="">
+        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" width="480" height="480" loading="lazy" alt="">
         <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" alt="">
+        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" width="480" height="480" loading="lazy" alt="">
         <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <img src="assets/testimonials/whatsapp-camila.webp" data-full="assets/testimonials/whatsapp-camila-full.webp" alt="">
+        <img src="assets/testimonials/whatsapp-camila.webp" data-full="assets/testimonials/whatsapp-camila-full.webp" width="480" height="480" loading="lazy" alt="">
         <p class="cap"><strong>Camila</strong> · via WhatsApp</p>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <img src="assets/testimonials/whatsapp-ana.webp" data-full="assets/testimonials/whatsapp-ana-full.webp" alt="">
+        <img src="assets/testimonials/whatsapp-ana.webp" data-full="assets/testimonials/whatsapp-ana-full.webp" width="480" height="480" loading="lazy" alt="">
         <p class="cap"><strong>Ana</strong> · via WhatsApp</p>
       </div>
     </div>
@@ -857,6 +867,7 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
