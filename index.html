@@ -267,40 +267,45 @@ button{font-family:inherit;cursor:pointer;}
 .bonus-card .was{font-size:12px;color:var(--ink-soft);text-decoration:line-through;}
 .bonus-card .now{font-size:13px;font-weight:800;color:var(--olive);}
 
-/* ---------- Testimonials ---------- */
-.testi-scroll{
-  max-width:var(--maxw);
-  margin:0 auto;
-  display:flex;gap:16px;overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  padding:4px 20px 10px;
+/* ---------- Testimonials (esteira) ---------- */
+.testi-esteira{
+  overflow:hidden;
+  margin-top:8px;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
-.testi-scroll::-webkit-scrollbar{display:none;}
+.testi-esteira-track{
+  display:flex;align-items:flex-start;gap:16px;
+  width:max-content;
+  padding:4px 0 10px;
+  animation:testi-scroll 26s linear infinite;
+}
+.testi-esteira:hover .testi-esteira-track{animation-play-state:paused;}
+@keyframes testi-scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@media(prefers-reduced-motion:reduce){
+  .testi-esteira-track{animation:none;}
+}
 .testi-card{
-  scroll-snap-align:start;
-  flex:none;width:85%;max-width:420px;
+  flex:none;width:280px;
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius-md);
   overflow:hidden;
   box-shadow:var(--shadow);
 }
-.testi-card .shot{position:relative;}
 .testi-card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in;}
-.testi-card .zoom-hint{
-  position:absolute;bottom:10px;right:10px;
-  width:32px;height:32px;border-radius:50%;
-  background:rgba(46,38,32,.55);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:none;
-  backdrop-filter:blur(2px);
-}
 .testi-card .cap{
   padding:11px 14px 14px;
   font-size:13px;color:var(--ink-soft);
   text-align:center;
 }
 .testi-card .cap strong{color:var(--ink);font-weight:700;}
+@media(max-width:480px){
+  .testi-card{width:240px;}
+}
 
 /* ---------- Lightbox ---------- */
 .lightbox-overlay{
@@ -641,27 +646,33 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
       <h2>Mamães que organizaram a gestação por aqui</h2>
     </div>
   </div>
-  <div class="testi-scroll">
-    <div class="testi-card">
-      <div class="shot">
+
+  <div class="testi-esteira">
+    <div class="testi-esteira-track">
+      <div class="testi-card">
         <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" alt="Print de conversa no WhatsApp: Julia contando que imprimiu as três cadernetas, a impressão ficou perfeita e o material maravilhoso, e que se emocionou ao começar a preencher a de gestante.">
-        <span class="zoom-hint">⊕</span>
+        <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
       </div>
-      <p class="cap"><strong>Julia</strong> · via WhatsApp · toque para ampliar</p>
-    </div>
-    <div class="testi-card">
-      <div class="shot">
+      <div class="testi-card">
         <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" alt="Print de conversa no WhatsApp: Maria contando que imprimiu tudo em casa, ficou apaixonada pela Caderneta de Gestante e que o kit de Enxoval está ajudando a organizar as coisas.">
-        <span class="zoom-hint">⊕</span>
+        <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
       </div>
-      <p class="cap"><strong>Maria</strong> · via WhatsApp · toque para ampliar</p>
-    </div>
-    <div class="testi-card">
-      <div class="shot">
+      <div class="testi-card">
         <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" alt="Print de conversa no WhatsApp: cliente contando que já mandou imprimir, amou que veio tudo prontinho e vai guardar o material para mostrar ao filho quando crescer.">
-        <span class="zoom-hint">⊕</span>
+        <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
       </div>
-      <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp · toque para ampliar</p>
+      <div class="testi-card" aria-hidden="true">
+        <img src="assets/testimonials/whatsapp-julia.webp" data-full="assets/testimonials/whatsapp-julia-full.webp" alt="">
+        <p class="cap"><strong>Julia</strong> · via WhatsApp</p>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <img src="assets/testimonials/whatsapp-maria.webp" data-full="assets/testimonials/whatsapp-maria-full.webp" alt="">
+        <p class="cap"><strong>Maria</strong> · via WhatsApp</p>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <img src="assets/testimonials/whatsapp-cliente.webp" data-full="assets/testimonials/whatsapp-cliente-full.webp" alt="">
+        <p class="cap"><strong>Cliente verificada</strong> · via WhatsApp</p>
+      </div>
     </div>
   </div>
 </section>
