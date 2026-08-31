@@ -156,10 +156,11 @@ button{font-family:inherit;cursor:pointer;}
 .btn:active{transform:translateY(0);}
 .btn.ghost{
   background:transparent;
-  color:var(--terracotta-dark);
-  border:1.5px solid var(--terracotta);
+  color:var(--ink-soft);
+  border:1.5px solid var(--line);
   box-shadow:none;
 }
+.btn.ghost:hover{border-color:var(--ink-soft);box-shadow:none;}
 .btn.dark{background:var(--olive);box-shadow:0 14px 28px -12px rgba(86,95,61,.5);}
 .btn.small{padding:12px 18px;font-size:14px;width:auto;}
 .microtrust{
@@ -338,25 +339,59 @@ button{font-family:inherit;cursor:pointer;}
   border-radius:var(--radius-lg);
   padding:22px 20px 20px;
 }
-.plan.featured{
-  border-color:var(--terracotta);
-  box-shadow:var(--shadow);
-}
-.plan .ribbon{
-  position:absolute;top:-13px;left:20px;
-  background:var(--terracotta);
-  color:#fff;font-size:11.5px;font-weight:800;
-  letter-spacing:.04em;text-transform:uppercase;
-  padding:6px 12px;border-radius:999px;
-}
 .plan .name{font-size:13px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
-.plan .price{margin-top:6px;display:flex;align-items:baseline;gap:8px;}
+.plan .price{margin-top:6px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
 .plan .price .now{font-family:"Fraunces",serif;font-size:34px;font-weight:650;}
 .plan .price .was{font-size:15px;color:var(--ink-soft);text-decoration:line-through;}
 .plan .feats{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:9px;}
 .plan .feats li{display:flex;gap:9px;font-size:13.5px;align-items:flex-start;}
 .plan .feats li::before{content:"✓";color:var(--olive);font-weight:800;flex:none;}
 .plan .cta{margin-top:18px;}
+
+/* Featured plan gets real visual weight */
+.plan.featured{
+  border:2px solid var(--terracotta);
+  background:linear-gradient(165deg, #fff 0%, var(--rose-pale) 150%);
+  box-shadow:var(--shadow), 0 0 0 5px rgba(200,104,95,.12);
+  padding-top:26px;
+}
+@media(min-width:640px){
+  .plan.featured{margin-top:-14px;padding-bottom:26px;}
+}
+.plan .price .save{
+  background:var(--olive);color:var(--paper);
+  font-size:11px;font-weight:800;letter-spacing:.02em;
+  padding:3px 9px;border-radius:999px;
+  align-self:center;
+}
+.plan.featured .feats li.bonus::before{content:"🎁";}
+.plan .ribbon{
+  position:absolute;top:-15px;left:20px;
+  display:flex;align-items:center;gap:5px;
+  background:linear-gradient(100deg, var(--terracotta) 0%, var(--rose) 45%, var(--terracotta) 100%);
+  background-size:220% 100%;
+  color:#fff;font-size:11.5px;font-weight:800;
+  letter-spacing:.04em;text-transform:uppercase;
+  padding:7px 14px;border-radius:999px;
+  box-shadow:0 8px 16px -6px rgba(200,104,95,.6);
+  animation:ribbon-shine 3.5s ease-in-out infinite;
+}
+@keyframes ribbon-shine{
+  0%,100%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+}
+#planCompleto .btn{
+  font-size:16.5px;padding:18px 26px;
+  animation:cta-pulse 2.8s ease-in-out infinite;
+}
+@keyframes cta-pulse{
+  0%,100%{box-shadow:0 14px 28px -12px rgba(200,104,95,.55);}
+  50%{box-shadow:0 18px 34px -10px rgba(200,104,95,.7), 0 0 0 6px rgba(200,104,95,.14);}
+}
+@media(prefers-reduced-motion:reduce){
+  .plan .ribbon{animation:none;}
+  #planCompleto .btn{animation:none;}
+}
 
 /* ---------- Guarantee ---------- */
 .guarantee-wrap{
@@ -716,13 +751,13 @@ footer .credit{margin-top:14px;font-size:12px;color:var(--ink-soft);}
       </div>
 
       <div class="plan featured" id="planCompleto">
-        <span class="ribbon">Mais escolhida</span>
+        <span class="ribbon">🔥 Mais escolhida</span>
         <p class="name">Kit completo + bônus</p>
-        <div class="price"><span class="was">R$103,90</span><span class="now">R$67,00</span></div>
+        <div class="price"><span class="was">R$103,90</span><span class="now">R$67,00</span><span class="save">-35%</span></div>
         <ul class="feats">
           <li>Caderneta completa em PDF (77 páginas)</li>
-          <li>Bônus: Kit Completo de Enxoval do Bebê (40 páginas)</li>
-          <li>Bônus: Diário de Memórias do Bebê (50 páginas)</li>
+          <li class="bonus">Bônus: Kit Completo de Enxoval do Bebê (40 páginas)</li>
+          <li class="bonus">Bônus: Diário de Memórias do Bebê (50 páginas)</li>
           <li>Pronta para imprimir + acesso imediato</li>
         </ul>
         <div class="cta">
