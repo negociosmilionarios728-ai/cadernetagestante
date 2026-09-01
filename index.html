@@ -1029,6 +1029,21 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
   overlay.addEventListener('click', function(e){ if(e.target === overlay) closeLightbox(); });
 })();
 
+// Forward incoming UTM params to every ZuckPay checkout link (Utmify attribution)
+(function(){
+  var incoming = new URLSearchParams(window.location.search);
+  var utmKeys = ['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term'];
+  document.querySelectorAll('a[href*="zuckpay.com.br"]').forEach(function(link){
+    try{
+      var url = new URL(link.href);
+      utmKeys.forEach(function(key){
+        url.searchParams.set(key, incoming.get(key) || '');
+      });
+      link.href = url.toString();
+    }catch(e){}
+  });
+})();
+
 // Meta Pixel -- InitiateCheckout on every checkout-bound button
 (function(){
   if (typeof fbq !== 'function') return;
